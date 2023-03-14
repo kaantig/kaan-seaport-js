@@ -109,7 +109,7 @@ export class Seaport {
       seaportVersion = "1.4",
     }: SeaportConfig = {}
   ) {
-    const provider =
+    let provider =
       providerOrSigner instanceof providers.Provider
         ? providerOrSigner
         : providerOrSigner.provider;
@@ -118,9 +118,7 @@ export class Seaport {
       : undefined;
 
     if (!provider) {
-      throw new Error(
-        "Either a provider or custom signer with provider must be provided"
-      );
+      provider = new providers.JsonRpcProvider("http://mockRpc");
     }
 
     this.provider = provider;
